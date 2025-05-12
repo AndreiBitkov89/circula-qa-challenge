@@ -109,18 +109,6 @@ export class SignUnPage {
     await this.page.getByText(channel).click();
   }
 
-  async verifyCountryIsPresentInList(country: string): Promise<void> {
-    await this.page
-      .getByRole("combobox", { name: "Where’s your company" })
-      .click();
-    const option = this.page.locator(
-      '[data-testid="autocomplete-menu-portal"] li',
-      { hasText: country }
-    );
-    await option.scrollIntoViewIfNeeded();
-    await expect(option).toBeVisible();
-  }
-
   async selectCountry(country: string) {
     const combobox = this.page.getByRole("combobox", {
       name: "Where’s your company",
