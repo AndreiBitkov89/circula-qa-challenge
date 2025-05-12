@@ -1,0 +1,27 @@
+{
+  "name": "circula-qa-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:report": "npx playwright show-report",
+    "test:web": "npx playwright test --grep=@ui --project=chromium --project=firefox --project=webkit",
+    "test:chrome": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:webkit": "npx playwright test --project=webkit",
+    "test:mobile": "npx playwright test --project='Mobile Safari' --project='Mobile Chrome'",
+    "test:mobile:ios": "npx playwright test --project='Mobile Safari'",
+    "test:mobile:android": "npx playwright test --project='Mobile Chrome'",
+    "test:api": "npx playwright test --project='API Tests'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.17"
+  },
+  "dependencies": {
+    "axios": "^1.9.0"
+  }
+}
