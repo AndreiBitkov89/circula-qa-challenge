@@ -46,7 +46,7 @@
 
 ---
 As examples of automation, I implemented several simple cases - creating an account with Sweden, entering values ​​by typing, selecting from a list, filtering by part of the name
-Also tested are two cases written on the backend - creating an account with Sweden and removing Sweden from the backend.
+Also tested are two cases written on the backend - request on creation an account with Sweden and getting Sweden from the backend.
 
 During testing, I encountered the fact that selecting a country from the list on Chrome leads to the browser sticking and freezing, for Chrome this case is skipped and requires additional debugging. I used a simple POM and chain of invocations patterns. 
 
