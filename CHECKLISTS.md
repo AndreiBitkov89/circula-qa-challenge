@@ -48,7 +48,7 @@
 As examples of automation, I implemented several simple cases - creating an account with Sweden, entering values ​​by typing, selecting from a list, filtering by part of the name
 Also tested are two cases written on the backend - creating an account with Sweden and removing Sweden from the backend.
 
-During testing, I encountered the fact that selecting a country from the list on Chrome leads to the browser sticking and freezing, for Chrome this case is skipped and requires additional debugging. I used a simple POM and chain of invocations patterns. As example of further improvements can be implemented the builder for a new client.
+During testing, I encountered the fact that selecting a country from the list on Chrome leads to the browser sticking and freezing, for Chrome this case is skipped and requires additional debugging. I used a simple POM and chain of invocations patterns. 
 
 Commands
 
@@ -115,77 +115,67 @@ Commands
 
 ## Task 3: iOS - Password change logic
 
-The design lacks the error of checking a new password and partial verification - in a real case this problem will be raised at the stage of layout analysis. At the moment it is assumed (not a very good real approach) that the password is dynamically verified as it is entered, the fulfilled conditions will be highlighted in green.
+## Clarified Rules & Expected Behaviors
 
-## Other questions for clarification
+- Special characters (e.g., !@#$%) are optional.
+- Any letter is sufficient.
+- No maximum password length is enforced (skip max-length tests).
+- Copy-paste is allowed in both password fields.
+- Dynamic verification is applied as you type, changing conditions from grey to green when fulfilled.
 
-- Should special characters (e.g., !@#$%) and spaces be required, optional, or restricted?
-- Are uppercase and lowercase letters both required, or is any letter sufficient?
-- What is the maximum password length? What should happen if the maximum is exceeded?
-- Should copy-paste be allowed in the password fields?
-- Should the system validate only Latin letters?
+---
 
-## Button State Behavior
-
+### Button State Behavior
 1. CTA button is disabled by default and matches the design.
-2. CTA button remains disabled if only the one password(current or new) is filled.
+2. CTA button remains disabled if only the current password is filled.
 3. CTA button remains disabled if the new password is invalid.
 4. CTA button activates and changes color only when both fields are filled and the new password is valid.
-5. CTA button becomes disabled and changes color again if the new password is later modified to be invalid.
+5. CTA button becomes disabled again if the new password is later modified to be invalid.
 
-## New Password Validation Rules
-
+### New Password Validation Rules
 6. Enter password shorter than 8 characters – validation fails.
-7. Enter password consisting only of numbers – validation fails.
-8. Enter password consisting only of Latin letters – validation fails.
-9. Enter password with at least 1 non-Latin letter, at least 1 number, and length 8 – validation fails.
-10. Enter password with at least 1 Latin letter, at least 1 number, and length shorter than 8 characters – validation fails.
-11. Enter password with at least 1 Latin letter, at least 1 number, and length of 8 characters – validation passes.
-12. Enter password with at least 1 Latin letter, at least 1 number, and length of 9 characters – validation passes.
-13. Enter password with at least 1 Latin letter, at least 1 number, and length up to the maximum (needs clarification) – validation passes.
-14. Enter password with length exceeding the maximum (maximum + 1) – behavior needs to be clarified.
+7. Enter password with only numbers – validation fails.
+8. Enter password with only letters (Latin or non-Latin) – validation fails.
+9. Enter password with at least one letter and one number, shorter than 8 characters – validation fails.
+10. Enter password with at least one letter and one number, exactly 8 characters or more – validation passes.
+11. Passwords can include special characters, but they are optional.
 
-## Validation and Messaging
+### Validation and Messaging
+12. Validation of current password triggers only after clicking the CTA button.
+13. Show error message if the current password is incorrect.
+14. Error message text and style match the design.
+15. Stay on the same screen after validation error.
+16. Highlight invalid password in red.
+17. Allow user to edit invalid password.
+18. Redirect to settings page with success message after successful change.
+19. Success message styling matches the design.
+20. Reusing the current password is rejected.
+21. Pasting long passwords works correctly (no max limit applied).
 
-15. Validation of the new password triggers after clicking the CTA button.
-16. An error message is displayed if the current password is incorrect, according to design.
-17. An error message text matches the design.
-17. After an error of validation current password, the user remains on the same screen without redirection.
-18. Invalid password is highlighted in red after validation.
-19. User can edit the invalid password to correct it.
-20. User is redirected to the settings page with a success message if both passwords are valid.
-21. Success message styling and text matches the design.
-22. Reusing the current password in new password filed is rejected(needs to be clarified).
-23. Pasting a long password behaves correctly (maximum length needs to be clarified).
+### Post-Change Verification
+22. User can log in with the new password.
+23. User cannot log in with the old password.
+24. User can retry changing password after failure.
 
-## Post-Change Verification
+### UX Testing (Dynamic Verification)
+25. Password visibility toggle exists for both password fields.
+26. Activating toggle hides the password.
+27. Deactivating toggle reveals the password without losing the typed value.
+28. Layout and structure match the design.
+29. Fulfilled rules turn green with check icons as you type.
+30. Unfulfilled rules return to grey when you remove matching characters.
 
-24. User can log in using the new password.
-25. User cannot log in using the previous password.
-26. User can retry changing the password after a failed attempt.
+### Cross-Device and Layout Testing
+31. All behaviors work on iPhone (small screens).
+32. All behaviors work on iPad (large screens).
+33. All behaviors work in portrait and landscape modes.
 
-## UX Testing
-
-27. Password visibility toggle exists for both fields.
-28. Activating the toggle hides the password (changes it to hidden state).
-29. Deactivating the toggle reveals the password, keeping the previously entered value unchanged.
-30. The overall screen structure and element positions match the design.
-31. Each fulfilled password rule dynamically turns green with a check icon.
-32. Each unfulfilled rule dynamically turns grey with a default or dot icon when no longer satisfied.
-
-## Cross-Device and Layout Testing
-
-33. All behaviors work on iPhone (small screens).
-34. All behaviors work on iPad (large screens).
-35. All behaviors work in both portrait and landscape orientations.
-
-## Session and State Handling
-
-36. Screen state is preserved after receiving a phone call.
-37. Screen state is preserved after switching to the background and returning.
-38. Screen state is preserved after pressing the Home button and returning to the app.
-39. Screen state is preserved after switching to another app and returning via recent apps menu.
-40. Screen state is preserved after locking and unlocking the device.
-41. Screen state is preserved after low battery or power saver notifications.
+### Session and State Handling
+34. State is preserved after receiving a phone call.
+35. State is preserved after switching to background and returning.
+36. State is preserved after pressing Home and returning.
+37. State is preserved after switching to another app and returning via Recents.
+38. State is preserved after locking/unlocking the device.
+39. State is preserved after low battery or power saver notifications.
 
 
