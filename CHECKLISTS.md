@@ -25,7 +25,7 @@
 ## Country list content and API verification
 
 17. Sweden is present in the `/api/countries?locale=en&intent=REGISTRATION` response(automated).
-18. Sweden has the correct abbreviation code ("SE") in the response(automated).
+18. Sweden has the correct abbreviation code ("SE") in the response.
 19. Registration API `registration/register` accepts Sweden ("SE") as a valid country(automated).
 20. API returns success `errorCode: 0` when Sweden is provided as the country(automated).
 21. All other countries from the API also appear in the dropdown.

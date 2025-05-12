@@ -12,7 +12,7 @@ test.describe("@ui Check addition Sweden in the countries list", () => {
     company = DataGenerator.generateCompanyName();
   });
 
-  test("Chose Sweden by typing the country manually and create account", async ({
+  test("Choose Sweden by typing the country manually and create account", async ({
     page,
   }) => {
     const { signUp, email } = await registerUntilCompanyStep(page);
@@ -40,7 +40,7 @@ test.describe("@ui Check addition Sweden in the countries list", () => {
     await (await signUp.createAccount()).checkSuccess(email);
   });
 
-  test("Chose Sweden after entering part of the name", async ({ page }) => {
+  test("Choose Sweden after entering part of the name", async ({ page }) => {
     const { signUp } = await registerUntilCompanyStep(page);
     await signUp.fillCompanyInformation(company, partName, channel);
     expect(await signUp.getCountryName()).toBe(countryForCheck);
